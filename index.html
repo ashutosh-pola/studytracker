@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <style>
+        body 
+        {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 20px;
+        }
+        #time 
+        {
+        font-size: 80px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        }
+        button
+        {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="time">00:00:00</div>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+    <button id="reset">Reset</button>
+    <script>
+        let timer;
+        let seconds = 0;
+
+        function updateTime() {
+            const hrs = String(Math.floor(seconds / 3600)).padStart(2, '0');
+            const mins = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
+            const secs = String(seconds % 60).padStart(2, '0');
+            document.getElementById('time').textContent = `${hrs}:${mins}:${secs}`;
+        }
+
+        document.getElementById('start').addEventListener('click', () => {
+            if (!timer) {
+                timer = setInterval(() => {
+                    seconds++;
+                    updateTime();
+                }, 1000);
+            }
+        });
+
+        document.getElementById('stop').addEventListener('click', () => {
+            clearInterval(timer);
+            timer = null;
+        });
+
+        document.getElementById('reset').addEventListener('click', () => {
+            clearInterval(timer);
+            timer = null;
+            seconds = 0;
+            updateTime();
+        });
+
+    </script>>
+</body>
+
+
+
+</html>
